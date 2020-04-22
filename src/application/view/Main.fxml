@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="672.0" style="-fx-background-color: #EEE8AA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
+   <children>
+      <ImageView fitHeight="169.0" fitWidth="202.0" layoutX="461.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/gold.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="113.0" layoutY="33.0" prefHeight="91.0" prefWidth="301.0" text="WELCOME TO" textFill="CHOCOLATE">
+         <font>
+            <Font name="OCR A Extended" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="124.0" prefHeight="62.0" prefWidth="356.0" text="GOLD WALLET" textFill="GOLDENROD">
+         <font>
+            <Font name="OCR A Extended" size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="259.0" text="Welcome back!" textFill="CHOCOLATE">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="354.0" text="Are you new?" textFill="CHOCOLATE">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="375.0" layoutY="253.0" mnemonicParsing="false" onAction="#SignInButtonClicked" prefHeight="51.0" prefWidth="174.0" text="Sign In" textFill="#75370a">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="372.0" layoutY="342.0" mnemonicParsing="false" onAction="#signUpButtonClicked" prefHeight="51.0" prefWidth="180.0" text="Sign Up " textFill="#612f0b">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
