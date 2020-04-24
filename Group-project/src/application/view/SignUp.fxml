@@ -29,7 +29,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Label fx:id="message" layoutX="322.0" layoutY="116.0" prefHeight="27.0" prefWidth="242.0" />
+      <Label fx:id="message" layoutX="274.0" layoutY="124.0" prefHeight="27.0" prefWidth="316.0" />
       <Label layoutX="274.0" layoutY="299.0" prefHeight="27.0" prefWidth="402.0" text="• password should contain at least 6 characters" textFill="#7c7777" />
       <Label fx:id="message2" layoutX="274.0" layoutY="332.0" prefHeight="27.0" prefWidth="402.0" text="• password should contain at least 1 number" textFill="#7c7777" />
       <Label fx:id="message21" layoutX="274.0" layoutY="368.0" prefHeight="27.0" prefWidth="402.0" text="• password should contain at least 1 letter" textFill="#7c7777" />

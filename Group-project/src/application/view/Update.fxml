@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.UpdateController">
    <children>
-      <Button layoutX="300.0" layoutY="181.0" mnemonicParsing="false" onAction="#backButtonClicked" text="Back" />
+      <Button layoutY="6.0" mnemonicParsing="false" onAction="#backButtonClicked" style="-fx-padding: 0; -fx-background-color: no;">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logout%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <DatePicker layoutX="155.0" layoutY="63.0" prefHeight="39.0" prefWidth="273.0" />
+      <TextField layoutX="155.0" layoutY="161.0" prefHeight="39.0" prefWidth="273.0" />
+      <TextField layoutX="155.0" layoutY="270.0" prefHeight="39.0" prefWidth="273.0" />
    </children>
 </AnchorPane>
