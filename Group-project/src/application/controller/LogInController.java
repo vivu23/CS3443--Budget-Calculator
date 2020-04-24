@@ -51,7 +51,7 @@ public class LogInController {
 		boolean success;
 		
 		data.setData();
-		check = data.checkLogInName(userid);
+		check = data.checkLogInName(userid.trim());
 		
 		if(!check) {
 			message.setText("User Name DOES NOT exist");

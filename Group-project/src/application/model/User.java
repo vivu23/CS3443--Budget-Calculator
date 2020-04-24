@@ -44,17 +44,6 @@ public class User {
 						if(name.equals(parts[0])) { //if the user is already in the list
 							return false;
 						}
-						else { // if the user is not in the list
-							try {
-								FileWriter w = new FileWriter(file, true);
-								w.write(name + " ");
-								w.write(password + "\n");
-								w.close();
-								break;
-							} catch (IOException e) {
-								e.printStackTrace();
-							} 					    
-						}
 					}
 					scanner.close();
 				}
@@ -62,13 +51,21 @@ public class User {
 					e.printStackTrace();
 				}
 			}
+			try {
+				FileWriter w = new FileWriter(file, true);
+				w.write(name + " ");
+				w.write(password + "\n");
+				w.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		
 		return true;
 	}
 	
 	public void setData() {
 		list = new HashMap<String, String>();
-		File file = new File("Group-project/files/users.txt");
+		File file = new File("files/users.txt");
 		String line="";
 		String[] parts;
 		Scanner sc;
