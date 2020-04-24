@@ -46,18 +46,18 @@ public class User {
 						}
 					}
 					scanner.close();
+					try {
+						FileWriter w = new FileWriter(file, true);
+						w.write(name + " ");
+						w.write(password + "\n");
+						w.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 				catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
-			}
-			try {
-				FileWriter w = new FileWriter(file, true);
-				w.write(name + " ");
-				w.write(password + "\n");
-				w.close();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		
 		return true;
@@ -65,7 +65,7 @@ public class User {
 	
 	public void setData() {
 		list = new HashMap<String, String>();
-		File file = new File("files/users.txt");
+		File file = new File("Group-project/files/users.txt");
 		String line="";
 		String[] parts;
 		Scanner sc;
@@ -76,6 +76,7 @@ public class User {
 					parts = line.split(" ");
 					list.put(parts[0], parts[1]);
 				}
+				System.out.print(list);
 				sc.close();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -113,5 +114,7 @@ public class User {
 		}
 		return false;
 	}
-
+	public void printList() {
+		System.out.print(list);
+	}
 }
