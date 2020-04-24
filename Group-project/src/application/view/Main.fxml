@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="766.0" style="-fx-background-color: #EEE8AA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="672.0" style="-fx-background-color: #EEE8AA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainController">
    <children>
-      <Button layoutX="118.0" layoutY="389.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="142.0" text="UPDATE" textFill="CHOCOLATE">
-         <font>
-            <Font name="OCR A Extended" size="18.0" />
-         </font></Button>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="114.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="212.0" fitWidth="220.0" layoutX="403.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/budget.png" />
-         </image></ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="492.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/training.png" />
-         </image></ImageView>
-      <Label layoutX="399.0" layoutY="109.0" />
-      <Label layoutX="169.0" layoutY="39.0" prefHeight="84.0" prefWidth="460.0" text="Gold Wallet" textFill="GOLDENROD">
+            <Image url="@../../../images/gold.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="113.0" layoutY="33.0" prefHeight="91.0" prefWidth="301.0" text="WELCOME TO" textFill="CHOCOLATE">
          <font>
-            <Font name="OCR A Extended" size="64.0" />
+            <Font name="OCR A Extended" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="496.0" layoutY="389.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="142.0" text="VIEW" textFill="CHOCOLATE">
+      <Label layoutX="59.0" layoutY="124.0" prefHeight="62.0" prefWidth="356.0" text="GOLD WALLET" textFill="GOLDENROD">
          <font>
-            <Font name="OCR A Extended" size="18.0" />
+            <Font name="OCR A Extended" size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="259.0" text="Welcome back!" textFill="CHOCOLATE">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="354.0" text="Are you new?" textFill="CHOCOLATE">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="375.0" layoutY="253.0" mnemonicParsing="false" onAction="#logInButtonClicked" prefHeight="51.0" prefWidth="174.0" text="Sign In" textFill="#75370a">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="44.0" layoutY="344.0" text="Update your spending">
+      <Button layoutX="372.0" layoutY="342.0" mnemonicParsing="false" onAction="#signUpButtonClicked" prefHeight="51.0" prefWidth="180.0" text="Sign Up " textFill="#612f0b">
          <font>
             <Font name="OCR A Extended" size="24.0" />
          </font>
-      </Label>
-      <Label layoutX="386.0" layoutY="344.0" text="Keep track on your wallet">
-         <font>
-            <Font name="OCR A Extended" size="24.0" />
-         </font>
-      </Label>
+      </Button>
    </children>
 </AnchorPane>
