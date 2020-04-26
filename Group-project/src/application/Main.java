@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -19,6 +20,7 @@ public class Main extends Application {
 
 		window = primaryStage;
 		window.setTitle("Gold Wallet");
+		window.getIcons().add(new Image("file:Group-project/images/dollar-coin.png"));
 		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/view/Main.fxml"));
