@@ -21,6 +21,7 @@ import javafx.util.Duration;
 
 public class HomePageController {
 	
+	private String userName;
 	@FXML
 	private AnchorPane mainPane;
 	@FXML
@@ -38,6 +39,8 @@ public class HomePageController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/view/Update.fxml"));
 		mainPane = loader.load();
+		UpdateController updateController = loader.getController();
+		updateController.getName(userName);		
 		Scene scene = new Scene(mainPane);
 		window.setScene(scene);
 		window.show();
@@ -74,6 +77,7 @@ public class HomePageController {
 	
 	public void getName(String userid) {
 		this.name.setText("Hello, " + userid + "!");
+		userName = userid;
 	}
 
 		
