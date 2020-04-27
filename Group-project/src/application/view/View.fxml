@@ -7,9 +7,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="739.0" style="-fx-background-color: EEE8AA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="739.0" style="-fx-background-color: EEE8AA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ViewController">
    <children>
-      <Label layoutX="174.0" layoutY="47.0" prefHeight="79.0" prefWidth="402.0" text="Hello, abc123!" textFill="PERU">
+      <Label fx:id="name" layoutX="174.0" layoutY="47.0" prefHeight="79.0" prefWidth="402.0" textFill="PERU">
          <font>
             <Font name="OCR A Extended" size="45.0" />
          </font></Label>
@@ -57,5 +57,10 @@
             <Font name="OCR A Extended" size="18.0" />
          </font></Button>
       <PieChart layoutX="124.0" layoutY="312.0" prefHeight="394.0" prefWidth="490.0" />
+      <Label fx:id="time" layoutX="610.0" layoutY="-1.0" prefHeight="39.0" prefWidth="130.0" text="20:20:20" textFill="SIENNA">
+         <font>
+            <Font name="OCR A Extended" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

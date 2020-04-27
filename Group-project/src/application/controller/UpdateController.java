@@ -33,7 +33,8 @@ public class UpdateController {
 	
 	private Spending userSpending = new Spending();
 	
-	private String[] str = {"Bills", "Shopping", "Food", "Tuition"};
+	//This is the array of choices in the checkbox
+	private String[] str = {"Bills", "Shopping", "Food", "Tuition"}; 
 	
 	private String userid;
 	
@@ -59,6 +60,14 @@ public class UpdateController {
 	private ComboBox<String> spendingType;
 	
 	
+	/*
+	 * public void backButtonClicked(ActionEvent)
+	 * output: None
+	 * 
+	 * This method will handle the action of a back button. It'll take the user to the previous
+	 * scene, which is the HomePage scene.
+	 * 
+	 */
 	@FXML
 	public void backButtonClicked(ActionEvent event) throws Exception {
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -72,6 +81,12 @@ public class UpdateController {
 		window.show();
 	}
 	
+	/*
+	 * public void resetButtonClicked(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the "RESET" button. It'll clear all the current information.
+	 */
 	public void resetButtonClicked(ActionEvent event) {
 		date.setValue(null);
 		money.clear();
@@ -79,17 +94,27 @@ public class UpdateController {
 	}
 	
 	public void doneButtonClicked(ActionEvent event) throws IOException{
-		String localDate = date.getValue().toString();
+		LocalDate localDate = date.getValue();
+		String dateToString = localDate.toString();
 		String temp = money.getText();
 		temp = temp.replace("$", "");
-		int spending = Integer.parseInt(temp);
-		String typeOfSpending = (String)spendingType.getValue();
 		
-		userSpending.addSpendingInfo(userid, localDate, typeOfSpending, spending);
-		message.setText("Spending is successfully updated!");
-		date.setValue(null);
-		money.clear();
-		spendingType.setValue(null);
+		double spending = Double.parseDouble(temp);
+		String typeOfSpending = (String)spendingType.getValue();
+		boolean checkDate;
+		
+		checkDate = userSpending.checkForDate(localDate);
+		if(!checkDate) {
+			message.setText("Date is INVALID");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+		}
+		else {
+			userSpending.addSpendingInfo(userid, dateToString, typeOfSpending, spending);
+			message.setText("Spending is successfully updated!");
+			date.setValue(null);
+			money.clear();
+			spendingType.setValue(null);
+		}
 	}
 	
 	public void initialize() {
