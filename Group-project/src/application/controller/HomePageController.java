@@ -51,6 +51,8 @@ public class HomePageController {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/view/View.fxml"));
 		mainPane = loader.load();
+		ViewController viewController = loader.getController();
+		viewController.getName(userName);
 		Scene scene = new Scene(mainPane);
 		window.setScene(scene);
 		window.show();
