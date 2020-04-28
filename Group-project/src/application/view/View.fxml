@@ -13,7 +13,7 @@
          <font>
             <Font name="OCR A Extended" size="45.0" />
          </font></Label>
-      <Button layoutY="2.0" mnemonicParsing="false" onAction="#backButtonClicked" style="-fx-background-color: no; -fx-padding: 0;">
+      <Button layoutY="2.0" mnemonicParsing="false" onAction="#backButtonClicked" style="-fx-background-color: none; -fx-padding: 0;">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
