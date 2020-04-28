@@ -111,6 +111,7 @@ public class UpdateController {
 		else {
 			userSpending.addSpendingInfo(userid, dateToString, typeOfSpending, spending);
 			message.setText("Spending is successfully updated!");
+			message.setStyle("-fx-text-fill: green;-fx-alignment: CENTER");
 			date.setValue(null);
 			money.clear();
 			spendingType.setValue(null);
