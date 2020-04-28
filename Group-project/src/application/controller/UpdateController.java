@@ -94,17 +94,18 @@ public class UpdateController {
 	}
 	
 	public void doneButtonClicked(ActionEvent event) throws IOException{
+		message.setText("");
 		LocalDate localDate = date.getValue();
-		message.setText("Yeet1");
-		String dateToString = null;
-		
-		if(localDate != null) {
-			dateToString = localDate.toString();
-		} else {
-			message.setText("Date was not set.");
+		if (localDate == null) {
+			message.setText("Date was not set properly.");
 			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
 			return;
 		}
+		message.setText(localDate.toString());
+		String dateToString = null;
+		
+		
+		dateToString = localDate.toString();
 		
 		String temp = money.getText();
 		temp = temp.replace("$", "");
