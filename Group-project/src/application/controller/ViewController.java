@@ -59,9 +59,9 @@ public class ViewController {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getClassLoader().getResource("application/view/HomePage.fxml"));
+		mainPane = loader.load();
 		HomePageController homepageController = loader.getController();
 		homepageController.getName(userid);
-		mainPane = loader.load();
 		Scene scene = new Scene(mainPane);
 		window.setScene(scene);
 		window.show();
