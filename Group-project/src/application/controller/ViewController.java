@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,7 +35,6 @@ import javafx.event.ActionEvent;
 
 public class ViewController {
 
-	
 	@FXML
 	private PieChart pieChart;
 
@@ -72,7 +72,6 @@ public class ViewController {
 	public void week1(ActionEvent event) throws Exception {
 		int oneWeek = 7;
 		getData(oneWeek);
-
 		// Will only show items purchased within one month
 	}
 
@@ -193,6 +192,8 @@ public class ViewController {
 
 		// Put all the elements from the list to this new array.
 		Double[] values = categoryTotals.toArray(new Double[0]);
+		Double percentage[];
+		Double total =0.0;
 
 
 		PieChart.Data data[] = new PieChart.Data[5];
@@ -200,18 +201,22 @@ public class ViewController {
 		// All the different categories
 		String key[] = { "Bills", "Shopping", "Food", "Tuition", "Other" };
 
-		// Loop through 5 times to add the key and value to the piechart data
+		//calculate the total of all the money
 		for (int i = 0; i < 5; i++) {
-			data[i] = new PieChart.Data(key[i], values[i]);
+			total += values[i];
 		}
-
+		// Loop through 5 times to add the key and percentage to the piechart data
+		for (int i = 0; i < 5; i++) {
+			data[i] = new PieChart.Data(key[i], Math.round(100.0*(values[i]/total)));
+		}
+		
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(data);
 		piechart.setData(pieChartData);
 		piechart.setTitle("Spending:");
 
 		// THis will show the values next each category
 		pieChartData.forEach(datas -> datas.nameProperty()
-				.bind(Bindings.concat(datas.getName(), " ", "$", datas.pieValueProperty())));
+				.bind(Bindings.concat(datas.getName(), " ", datas.pieValueProperty(), "%")));
 
 	}
 
