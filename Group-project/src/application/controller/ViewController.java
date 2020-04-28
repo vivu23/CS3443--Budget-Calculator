@@ -146,7 +146,6 @@ public class ViewController {
 			// the totals for that specific category
 			if (!usrDate.before(weekAgoDate)) {
 				if (spaceSeparatorArr[1].equals("Tuition")) {
-
 					tuitionTotal += Double.parseDouble(spaceSeparatorArr[2]);
 				}
 				if (spaceSeparatorArr[1].equals("Bills")) {
@@ -188,8 +187,8 @@ public class ViewController {
 		Double[] values = categoryTotals.toArray(new Double[0]);
 
 		// print to console test
-		for (Double value : categoryTotals)
-			System.out.print(value + " ");
+		//for (Double value : categoryTotals)
+		//	System.out.print(value + " ");
 
 		PieChart.Data data[] = new PieChart.Data[5];
 
