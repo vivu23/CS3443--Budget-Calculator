@@ -32,7 +32,7 @@ public class HomePageController {
 	private Button view;
 	@FXML
 	private Label name;
-
+	
 	@FXML
 	public void updateButtonClicked(ActionEvent event) throws Exception{
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
