@@ -34,7 +34,7 @@ public class UpdateController {
 	private Spending userSpending = new Spending();
 	
 	//This is the array of choices in the checkbox
-	private String[] str = {"Bills", "Shopping", "Food", "Tuition"}; 
+	private String[] str = {"Bills", "Shopping", "Food", "Tuition","Other"}; 
 	
 	private String userid;
 	
