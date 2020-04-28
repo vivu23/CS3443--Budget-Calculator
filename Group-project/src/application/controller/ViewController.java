@@ -210,7 +210,7 @@ public class ViewController {
 
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(data);
 		piechart.setData(pieChartData);
-		piechart.setTitle("Total Spenditures");
+		piechart.setTitle("Spending:");
 
 		// THis will show the values next each category
 		pieChartData.forEach(datas -> datas.nameProperty()
