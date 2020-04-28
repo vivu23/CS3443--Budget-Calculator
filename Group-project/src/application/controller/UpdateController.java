@@ -107,7 +107,7 @@ public class UpdateController {
 		
 		String temp = money.getText();
 		temp = temp.replace("$", "");
-		double spending = 0;
+		double spending = Double.parseDouble(temp);
 		String typeOfSpending = (String)spendingType.getValue();
 		boolean checkDate = false;
 		boolean checkMoney = false;

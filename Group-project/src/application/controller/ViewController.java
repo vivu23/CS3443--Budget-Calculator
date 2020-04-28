@@ -194,9 +194,6 @@ public class ViewController {
 		// Put all the elements from the list to this new array.
 		Double[] values = categoryTotals.toArray(new Double[0]);
 
-		// print to console test
-		//for (Double value : categoryTotals)
-		//	System.out.print(value + " ");
 
 		PieChart.Data data[] = new PieChart.Data[5];
 
