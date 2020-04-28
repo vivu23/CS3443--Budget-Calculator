@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -95,20 +96,40 @@ public class UpdateController {
 	
 	public void doneButtonClicked(ActionEvent event) throws IOException{
 		LocalDate localDate = date.getValue();
-		String dateToString = localDate.toString();
+		if (localDate == null) {
+			message.setText("Date was not set properly.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
+		String dateToString = null;
+		
+		dateToString = localDate.toString();
+		
 		String temp = money.getText();
 		temp = temp.replace("$", "");
-		
-		double spending = Double.parseDouble(temp);
+		double spending = 0;
 		String typeOfSpending = (String)spendingType.getValue();
-		boolean checkDate;
+		boolean checkDate = false;
+		boolean checkMoney = false;
+		
+		if(typeOfSpending == null) { //check second field chosen
+			message.setText("Spending type is empty.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
+		
+		if(!userSpending.checkforNum(temp)){ //check third field filled
+			message.setText("Money value is INVALID.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
 		
 		checkDate = userSpending.checkForDate(localDate);
+			
 		if(!checkDate) {
 			message.setText("Date is INVALID");
 			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
-		}
-		else {
+		} else {
 			userSpending.addSpendingInfo(userid, dateToString, typeOfSpending, spending);
 			message.setText("Spending is successfully updated!");
 			message.setStyle("-fx-text-fill: green;-fx-alignment: CENTER");
