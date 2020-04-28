@@ -94,21 +94,44 @@ public class UpdateController {
 	}
 	
 	public void doneButtonClicked(ActionEvent event) throws IOException{
+		message.setText("");
 		LocalDate localDate = date.getValue();
-		String dateToString = localDate.toString();
+		if (localDate == null) {
+			message.setText("Date was not set properly.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
+		message.setText(localDate.toString());
+		String dateToString = null;
+		
+		
+		dateToString = localDate.toString();
+		
 		String temp = money.getText();
 		temp = temp.replace("$", "");
-		
-		double spending = Double.parseDouble(temp);
+		double spending = 0;
 		String typeOfSpending = (String)spendingType.getValue();
-		boolean checkDate;
+		boolean checkDate = false;
+		
+		if(typeOfSpending == null) { //check second field chosen
+			message.setText("Type was not chosen.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
+		try { //check third field filled
+			spending = Double.parseDouble(temp);
+		} catch (Exception e) {
+			message.setText("Third field was left empty.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
 		
 		checkDate = userSpending.checkForDate(localDate);
+			
 		if(!checkDate) {
 			message.setText("Date is INVALID");
 			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
-		}
-		else {
+		} else {
 			userSpending.addSpendingInfo(userid, dateToString, typeOfSpending, spending);
 			message.setText("Spending is successfully updated!");
 			date.setValue(null);
