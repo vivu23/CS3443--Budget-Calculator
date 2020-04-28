@@ -45,6 +45,7 @@ public class HomePageController {
 		window.setScene(scene);
 		window.show();
 	}
+	
 	@FXML
 	public void viewButtonClicked(ActionEvent event) throws Exception {
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
