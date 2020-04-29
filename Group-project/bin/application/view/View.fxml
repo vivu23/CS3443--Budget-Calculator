@@ -65,10 +65,15 @@
             <Font name="OCR A Extended" size="18.0" />
          </font></Button>
       <PieChart fx:id="piechart" layoutX="126.0" layoutY="186.0" prefHeight="428.0" prefWidth="490.0" />
-      <Label fx:id="time" layoutX="610.0" layoutY="11.0" prefHeight="39.0" prefWidth="130.0" text="20:20:20" textFill="SIENNA">
+      <Label fx:id="time" layoutX="611.0" layoutY="-5.0" prefHeight="39.0" prefWidth="130.0" text="20:20:20" textFill="SIENNA">
          <font>
             <Font name="OCR A Extended" size="24.0" />
          </font>
       </Label>
+      <Button fx:id="budget" layoutX="566.0" layoutY="565.0" mnemonicParsing="false" onAction="#budgetList" prefHeight="39.0" prefWidth="159.0" text="View Budget!" textFill="SIENNA">
+         <font>
+            <Font name="OCR A Extended" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

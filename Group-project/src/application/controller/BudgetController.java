@@ -24,14 +24,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import application.model.Spending;
+
 import java.lang.Math;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 
 public class BudgetController {
 
+	private Spending userBudget = new Spending();
+	
 	private String userid;
 
+	@FXML
+	private Label name;
+	
+	@FXML
+	private Label time;
+	
     @FXML
     private Label prompt;
 
@@ -44,12 +58,20 @@ public class BudgetController {
 	@FXML
 	private Button budget;
 	
-	ArrayList<Double> catTotals = new ArrayList<Double>();
+	@FXML
+	private Label alert;
 	
-    void passList(ArrayList<Double> data) {
-    	catTotals = data;
-    }
-
+	private ArrayList<Double> catTotals = new ArrayList<Double>();
+	
+   
+	/*
+	 * public void backButtonClicked(ActionEvent)
+	 * output: None
+	 * 
+	 * This method will handle the action of a back button. It'll take the user to the previous
+	 * scene, which is the HomePage scene.
+	 * 
+	 */
 	@FXML
 	public void backButtonClicked(ActionEvent event) throws Exception {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -63,40 +85,85 @@ public class BudgetController {
 		window.show();
 	}
 	
+	/*
+	 * public void budgetGenerator(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the Send It button. It will take the user input for
+	 * Annual Income and send out the alert if his/her budget looks good or need to
+	 * reduce spending, and also shows the user his/her extra money for each month.
+	 * 
+	 */
 	@FXML
 	public void budgetGenerator(ActionEvent event) throws Exception {
+		String incomeAmount = income.getText().toString().trim();
 		NumberFormat formatter = NumberFormat.getCurrencyInstance();
-    	String incomeAmount = income.getText().toString().trim();
-    	
-		double total = 0.0, extra = 0.0;
-		double BillsMonthlyTotal = catTotals.get(0) / 12;
-		double shoppingMonthlyTotal = catTotals.get(1) / 12;
-		double foodMonthlyTotal = catTotals.get(2) / 12;
-		double tuitionMonthlyTotal = catTotals.get(3) / 12;
-		double otherMonthlyTotal = catTotals.get(4) / 12;
+		Double extra = 0.0;
+		boolean checkInput = false;
 		
-		for (int i = 0; i < 5; i++) {
-			total += catTotals.get(i);
+		checkInput = userBudget.checkforNum(incomeAmount);
+		if(!checkInput) {
+			alert.setText("Your annual income was not set properly");
+			alert.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");	
+			return;
 		}
-		
-		extra = (Double.parseDouble(incomeAmount) - total) / 12;
-
-		String str = "Your annual income: " + formatter.format(Double.parseDouble(incomeAmount)) + "\nYour monthly spenditures:\nTuition: " + formatter.format(tuitionMonthlyTotal) + "/ month\nBills: " + formatter.format(BillsMonthlyTotal) +
-				"/ month\nFood: " + formatter.format(foodMonthlyTotal) + "/ month\nShopping: " + formatter.format(shoppingMonthlyTotal) + "/ month\nOther: " + formatter.format(otherMonthlyTotal) + "/ month\n\nYou have: " + formatter.format(extra) + " to yourself each month!";
-		
-		income.setText(str);
-		
-		if(extra <= 0) {
-			extra = Math.abs(extra);
-			new Alert(Alert.AlertType.ERROR, "You are declining funds! Reduce spending " + formatter.format(extra) + " / month").showAndWait();
-		}
-		else
-			new Alert(AlertType.CONFIRMATION, "Your budget is looking good! Welcome to Gold Team!").showAndWait();
-		
+		String str = userBudget.printMessage(incomeAmount, catTotals);
 		prompt.setText("Here's a look at your monthly budget");
+		income.setText(str);
+		budget.setVisible(false);
+		
+		extra = userBudget.getExtra();
+		
+		if(extra < 0) {
+			extra = Math.abs(extra);
+			alert.setText("You are declining funds!Reduce spending!");
+			alert.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+		}
+		else {
+			alert.setText("Your budget is looking good! Welcome to Gold Team!");
+			alert.setStyle("-fx-text-fill: green;-fx-alignment: CENTER");		
+		}
+	}	
+		
+	/*
+	 * public void initialize()
+	 * output: None
+	 * 
+	 * This method is creating a live clock that demonstrate the real time and Date
+	 * 
+	 */
+	public void initialize() {
+		Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+			time.setText(LocalDateTime.now().format(formatter));
+		}), new KeyFrame(Duration.seconds(1)));
+		clock.setCycleCount(Animation.INDEFINITE);
+		clock.play();
 	}
 	
+	/*
+	 * public void passList(ArrayList<Double>)
+	 * input: an ArrayList<Double>
+	 * output: an ArrayList<Double>
+	 * 
+	 * This method is used to assign the List we're using equal to the list from the 
+	 * previous scene, which is View page.
+	 * 
+	 */
+	public void passList(ArrayList<Double> data) {
+		catTotals = data;
+	}
+	
+	/*
+	 * public void getName(String)
+	 * input: String
+	 * output: None
+	 * 
+	 * This method will take the userid that being passed to this Controller and 
+	 * set the Label as "Hello, abc123!"
+	 */
 	public void getName(String username) {
+		name.setText("Hello, " + username + "!");
 		this.userid = username;
 	}
 }
