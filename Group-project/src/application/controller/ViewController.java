@@ -5,11 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,24 +21,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import application.controller.BudgetController;
+import application.model.Spending;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class ViewController {
-
-	@FXML
-	private PieChart pieChart;
-
-	private static final boolean String = false;
+	
+	private Spending userSpending = new Spending();
 
 	private String userid;
 
@@ -54,6 +51,9 @@ public class ViewController {
 	@FXML
 	private PieChart piechart;
 
+	@FXML
+	private Button budget;
+	
 	/*
 	 * public void backButtonClicked(ActionEvent)
 	 * output: None
@@ -146,6 +146,37 @@ public class ViewController {
 		getData(oneYear);
 
 	}
+	
+	/*
+	 * public void budgetList(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the View Budget button. It will pass the Spending 
+	 * information in 1 year to the Budget Controller. 
+	 * It'll also take the user to the View Budget Page
+	 * 
+	 */
+	@FXML
+	public void budgetList(ActionEvent event) throws Exception {
+		ArrayList<Double> categoryTotals = new ArrayList<Double>();
+		categoryTotals = userSpending.setUpList(365, userid);
+	
+		try {
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getClassLoader().getResource("application/view/Budget.fxml"));
+			mainPane = loader.load();
+			BudgetController data = loader.getController();
+			data.passList(categoryTotals);
+			BudgetController name = loader.getController();
+			name.getName(userid);
+			Scene scene = new Scene(mainPane);
+			window.setScene(scene);
+			window.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/*
 	 * public void getData(int) 
@@ -158,76 +189,13 @@ public class ViewController {
 	 * subtracted from today's current date.
 	 * 
 	 */
+
 	public void getData(int days) throws Exception {
-
 		ArrayList<Double> categoryTotals = new ArrayList<Double>();
-
-		// Will be used to store the total of each category
-		double tuitionTotal = 0.0;
-		double BillsTotal = 0.0;
-		double shoppingTotal = 0.0;
-		double foodTotal = 0.0;
-		double otherTotal = 0.0;
-
-		// get todays time
-		LocalDate oneWeekAgoLocal = LocalDate.now().minusDays(days);
-
-		// We want type Date not localdate.
-		Date weekAgoDate = java.sql.Date.valueOf(oneWeekAgoLocal);
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		FileReader file = new FileReader(new File("Group-project/files/" + userid + ".txt"));
-
-		BufferedReader br = new BufferedReader(file);
-		String temp = br.readLine();
-
-		// loop through the file and use and blank space as delimiter
-		while (temp != null) {
-			String[] spaceSeparatorArr = temp.split(" ");
-
-			String dateInString = spaceSeparatorArr[0];
-
-			Date usrDate = formatter.parse(dateInString);
-			
-			// **First** check if the date on file is after a week ago or
-			// whatever time set by the method calling
-
-			// **Second** check if the category is matched, then start updating
-			// the totals for that specific category
-			if (!usrDate.before(weekAgoDate)) {
-				if (spaceSeparatorArr[1].equals("Tuition")) {
-					tuitionTotal += Double.parseDouble(spaceSeparatorArr[2]);
-				}
-				if (spaceSeparatorArr[1].equals("Bills")) {
-					BillsTotal += Double.parseDouble(spaceSeparatorArr[2]);
-				}
-				if (spaceSeparatorArr[1].equals("Shopping")) {
-					shoppingTotal += Double.parseDouble(spaceSeparatorArr[2]);
-				}
-				if (spaceSeparatorArr[1].equals("Food")) {
-					foodTotal += Double.parseDouble(spaceSeparatorArr[2]);
-				}
-				if (spaceSeparatorArr[1].equals("Other")) {
-					otherTotal += Double.parseDouble(spaceSeparatorArr[2]);
-				}
-
-			}
-
-			temp = br.readLine();
-		}
-		// starting adding all the total to our arraylist.
-		categoryTotals.add(BillsTotal);
-		categoryTotals.add(shoppingTotal);
-		categoryTotals.add(foodTotal);
-		categoryTotals.add(tuitionTotal);
-		categoryTotals.add(otherTotal);
-
+		categoryTotals = userSpending.setUpList(days, userid);
 		// Since we have all the values saved in an array, we can call the
 		// method that will create the pie Chart.
-
 		piechartGenerator(categoryTotals);
-		br.close();
 	}
 
 	/*
@@ -243,8 +211,7 @@ public class ViewController {
 		// Put all the elements from the list to this new array.
 		Double[] values = categoryTotals.toArray(new Double[0]);
 		Double percentage[];
-		Double total =0.0;
-
+		Double total = 0.0;
 
 		PieChart.Data data[] = new PieChart.Data[5];
 
@@ -264,17 +231,18 @@ public class ViewController {
 		piechart.setData(pieChartData);
 		piechart.setTitle("Spending:");
 
-		// THis will show the values next each category
+		// This will show the values next each category
 		pieChartData.forEach(datas -> datas.nameProperty()
 				.bind(Bindings.concat(datas.getName(), " ", datas.pieValueProperty(), "%")));
-
+		budget.setVisible(true);
 	}
 
 	/*
 	 * public void initialize()
 	 * output: None
 	 * 
-	 * This method is creating a live clock that demonstrate the real time and Date
+	 * This method is creating a live clock that demonstrate the real time and Date. 
+	 * It also set the "View Budget" button to be invisible.
 	 * 
 	 */
 	public void initialize() {
@@ -284,6 +252,7 @@ public class ViewController {
 		}), new KeyFrame(Duration.seconds(1)));
 		clock.setCycleCount(Animation.INDEFINITE);
 		clock.play();
+		budget.setVisible(false);
 	}
 
 	/*

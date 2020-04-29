@@ -110,6 +110,9 @@ public class UpdateController {
 	@FXML
 	public void doneButtonClicked(ActionEvent event) throws IOException{
 		LocalDate localDate = date.getValue(); 
+		String temp = money.getText();
+		temp = temp.replace("$", "");
+		
 		//If the user doesn't choose the date 
 		if (localDate == null) {
 			message.setText("Date was not set properly.");
@@ -117,16 +120,19 @@ public class UpdateController {
 			return;
 		}
 		
+		if(!userSpending.checkforNum(temp)){ //if the user doesn't type down the money
+			 //or the input is not number
+			message.setText("Money value is INVALID.");
+			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
+			return;
+		}
+		
 		String dateToString = null;
 		
 		dateToString = localDate.toString();
-		
-		String temp = money.getText();
-		temp = temp.replace("$", "");
 		double spending = Double.parseDouble(temp);
 		String typeOfSpending = (String)spendingType.getValue();
 		boolean checkDate = false;
-		boolean checkMoney = false;
 		
 		if(typeOfSpending == null) { //if user doesn't choose the type of spending
 			message.setText("Spending type is empty.");
@@ -134,12 +140,7 @@ public class UpdateController {
 			return;
 		}
 		
-		if(!userSpending.checkforNum(temp)){ //if the user doesn't type down the money
-											 //or the input is not number
-			message.setText("Money value is INVALID.");
-			message.setStyle("-fx-text-fill: red;-fx-alignment: CENTER");
-			return;
-		}
+		
 		
 		checkDate = userSpending.checkForDate(localDate);
 			
