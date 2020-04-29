@@ -24,7 +24,7 @@ public class User {
 		String regex = "[A-Za-z]{3}[0-9]{3}"; //the format of the userid
 		if(!name.matches(regex)) {
 			return false;
-		}
+		} 
 		return true;
 	}
 	
@@ -173,10 +173,10 @@ public class User {
 	 * compare with the password that the user put in the password box in SignIn page
 	 * 
 	 */
-	public boolean checkPasswword(String userid, String password) {
+	public boolean checkPassword(String userid, String password) {
 			if(password.equals(list.get(userid))){
 				return true;
-		}
+			}
 		return false;
 	}
 }
