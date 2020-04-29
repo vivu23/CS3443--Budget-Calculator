@@ -54,6 +54,14 @@ public class ViewController {
 	@FXML
 	private PieChart piechart;
 
+	/*
+	 * public void backButtonClicked(ActionEvent)
+	 * output: None
+	 * 
+	 * This method will handle the action of a back button. It'll take the user to the previous
+	 * scene, which is the HomePage scene.
+	 * 
+	 */
 	@FXML
 	public void backButtonClicked(ActionEvent event) throws Exception {
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -67,41 +75,71 @@ public class ViewController {
 		window.show();
 	}
 
-	// Will only show items purchased within one week
+	/*
+	 * public void week1(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the 1 week button. It will show the percentage of spending
+	 * in 1 week
+	 * 
+	 */
 	@FXML
 	public void week1(ActionEvent event) throws Exception {
 		int oneWeek = 7;
 		getData(oneWeek);
 		// Will only show items purchased within one month
 	}
-
+	
+	/*
+	 * public void oneMonth(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the 1 month button. It will show the percentage of spending
+	 * in 1 month
+	 * 
+	 */
 	@FXML
 	public void oneMonth(ActionEvent event) throws Exception {
 		int oneMonth = 30;
 		getData(oneMonth);
 	}
 
-	// Will only show items purchased within two months
-	@FXML
-	public void twoMonth(ActionEvent event) throws Exception {
-		int twoMonth = 60;
-		getData(twoMonth);
-	}
-
-	// Will only show items purchased within the past three months
+	/*
+	 * public void threeMonth(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the 3 month button. It will show the percentage of spending
+	 * in 3 months
+	 * 
+	 */
 	@FXML
 	public void threeMonth(ActionEvent event) throws Exception {
 		int threeMonth = 90;
 		getData(threeMonth);
 	}
 
+	/*
+	 * public void sixMonth(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the 6 month button. It will show the percentage of spending
+	 * in 6 months
+	 * 
+	 */
 	@FXML
 	public void sixMonth(ActionEvent event) throws Exception {
 		int sixMonth = 180;
 		getData(sixMonth);
 	}
 
-	// Will only show items purchased within the past year
+	/*
+	 * public void oneYear(ActionEvent)
+	 * output: None
+	 * 
+	 * This method is handling the 1 year sbutton. It will show the percentage of spending
+	 * in 1 year
+	 * 
+	 */
 	@FXML
 	public void oneYear(ActionEvent event) throws Exception {
 		int oneYear = 365;
@@ -109,11 +147,17 @@ public class ViewController {
 
 	}
 
-	// This Method is in charge of pulling all the data necessary to generate
-	// the pie chart.
-	// The parameter "days" represents the amount of days that will be
-	// subtracted from today's current date.
-
+	/*
+	 * public void getData(int) 
+	 * input: int
+	 * output: None
+	 * 
+	 * This Method is in charge of pulling all the data necessary to generate
+	 * the pie chart.
+	 * The parameter "days" represents the amount of days that will be
+	 * subtracted from today's current date.
+	 * 
+	 */
 	public void getData(int days) throws Exception {
 
 		ArrayList<Double> categoryTotals = new ArrayList<Double>();
@@ -186,8 +230,14 @@ public class ViewController {
 		br.close();
 	}
 
-	// This method will generate the actual graph. It will take a list of all
-	// values as the parameter.
+	/*
+	 * public void piechartGenerator(List<Double>)
+	 * input: List<Double>
+	 * output: None
+	 * 
+	 * This method will generate the actual graph. It will take a list of all 
+	 * values as the parameter.
+	 */
 	public void piechartGenerator(List<Double> categoryTotals) {
 
 		// Put all the elements from the list to this new array.
@@ -220,6 +270,13 @@ public class ViewController {
 
 	}
 
+	/*
+	 * public void initialize()
+	 * output: None
+	 * 
+	 * This method is creating a live clock that demonstrate the real time and Date
+	 * 
+	 */
 	public void initialize() {
 		Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -229,6 +286,14 @@ public class ViewController {
 		clock.play();
 	}
 
+	/*
+	 * public void getName(String)
+	 * input: String
+	 * output: None
+	 * 
+	 * This method will take the userid that being passed to this Controller and 
+	 * set the Label as "Hello, abc123!"
+	 */
 	public void getName(String userid) {
 		this.name.setText("Hello, " + userid + "!");
 		this.userid = userid;
