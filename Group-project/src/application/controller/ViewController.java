@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,13 +20,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import application.controller.BudgetController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -108,17 +106,83 @@ public class ViewController {
 		getData(oneYear);
 
 	}
+	
+	@FXML
+	public void budgetList(ActionEvent event) throws Exception {
+		ArrayList<Double> categoryTotals = new ArrayList<Double>();
+		double tuitionTotal = 0.0;
+		double BillsTotal = 0.0;
+		double shoppingTotal = 0.0;
+		double foodTotal = 0.0;
+		double otherTotal = 0.0;
+		int days = 365;
+
+		// get todays time
+		LocalDate oneWeekAgoLocal = LocalDate.now().minusDays(days);
+		// We want type Date not localdate.
+		Date weekAgoDate = java.sql.Date.valueOf(oneWeekAgoLocal);
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		FileReader file = new FileReader(new File("files/" + userid + ".txt"));
+		BufferedReader br = new BufferedReader(file);
+		String temp = br.readLine();
+
+		// loop through the file and use and blank space as delimiter
+		while (temp != null) {
+			String[] spaceSeparatorArr = temp.split(" ");
+			String dateInString = spaceSeparatorArr[0];
+			Date usrDate = formatter.parse(dateInString);	
+			if (!usrDate.before(weekAgoDate)) {
+				if (spaceSeparatorArr[1].equals("Tuition")) {
+					tuitionTotal += Double.parseDouble(spaceSeparatorArr[2]);
+				}
+				if (spaceSeparatorArr[1].equals("Bills")) {
+					BillsTotal += Double.parseDouble(spaceSeparatorArr[2]);
+				}
+				if (spaceSeparatorArr[1].equals("Shopping")) {
+					shoppingTotal += Double.parseDouble(spaceSeparatorArr[2]);
+				}
+				if (spaceSeparatorArr[1].equals("Food")) {
+					foodTotal += Double.parseDouble(spaceSeparatorArr[2]);
+				}
+				if (spaceSeparatorArr[1].equals("Other")) {
+					otherTotal += Double.parseDouble(spaceSeparatorArr[2]);
+				}
+			}
+			temp = br.readLine();
+		}
+
+		categoryTotals.add(BillsTotal);
+		categoryTotals.add(shoppingTotal);
+		categoryTotals.add(foodTotal);
+		categoryTotals.add(tuitionTotal);
+		categoryTotals.add(otherTotal);
+
+		br.close();
+
+		try {
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getClassLoader().getResource("application/view/Budget.fxml"));
+			mainPane = loader.load();
+			BudgetController data = loader.getController();
+			data.passList(categoryTotals);
+			BudgetController name = loader.getController();
+			name.getName(userid);
+			Scene scene = new Scene(mainPane);
+			window.setScene(scene);
+			window.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	// This Method is in charge of pulling all the data necessary to generate
 	// the pie chart.
 	// The parameter "days" represents the amount of days that will be
 	// subtracted from today's current date.
-
 	public void getData(int days) throws Exception {
-
 		ArrayList<Double> categoryTotals = new ArrayList<Double>();
-
-		// Will be used to store the total of each category
 		double tuitionTotal = 0.0;
 		double BillsTotal = 0.0;
 		double shoppingTotal = 0.0;
@@ -127,25 +191,19 @@ public class ViewController {
 
 		// get todays time
 		LocalDate oneWeekAgoLocal = LocalDate.now().minusDays(days);
-
 		// We want type Date not localdate.
 		Date weekAgoDate = java.sql.Date.valueOf(oneWeekAgoLocal);
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-		FileReader file = new FileReader(new File("Group-project/files/" + userid + ".txt"));
-
+		FileReader file = new FileReader(new File("files/" + userid + ".txt"));
 		BufferedReader br = new BufferedReader(file);
 		String temp = br.readLine();
 
 		// loop through the file and use and blank space as delimiter
 		while (temp != null) {
 			String[] spaceSeparatorArr = temp.split(" ");
-
 			String dateInString = spaceSeparatorArr[0];
-
-			Date usrDate = formatter.parse(dateInString);
-			
+			Date usrDate = formatter.parse(dateInString);	
 			// **First** check if the date on file is after a week ago or
 			// whatever time set by the method calling
 
@@ -167,7 +225,6 @@ public class ViewController {
 				if (spaceSeparatorArr[1].equals("Other")) {
 					otherTotal += Double.parseDouble(spaceSeparatorArr[2]);
 				}
-
 			}
 
 			temp = br.readLine();
@@ -193,8 +250,7 @@ public class ViewController {
 		// Put all the elements from the list to this new array.
 		Double[] values = categoryTotals.toArray(new Double[0]);
 		Double percentage[];
-		Double total =0.0;
-
+		Double total = 0.0;
 
 		PieChart.Data data[] = new PieChart.Data[5];
 
@@ -214,10 +270,9 @@ public class ViewController {
 		piechart.setData(pieChartData);
 		piechart.setTitle("Spending:");
 
-		// THis will show the values next each category
+		// This will show the values next each category
 		pieChartData.forEach(datas -> datas.nameProperty()
 				.bind(Bindings.concat(datas.getName(), " ", datas.pieValueProperty(), "%")));
-
 	}
 
 	public void initialize() {
