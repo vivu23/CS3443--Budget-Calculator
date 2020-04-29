@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="766.0" style="-fx-background-color: EEE8AA;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SignUpController">
+   <children>
+      <Label layoutX="274.0" layoutY="39.0" prefHeight="70.0" prefWidth="242.0" text="Hello!" textFill="CHOCOLATE">
+         <font>
+            <Font name="OCR A Extended" size="64.0" />
+         </font>
+      </Label>
+      <Label layoutX="107.0" layoutY="176.0" text="abc123" />
+      <Label layoutX="98.0" layoutY="256.0" text="Password" />
+      <Label layoutX="64.0" layoutY="417.0" text="Confirm password" />
+      <TextField fx:id="userName" layoutX="268.0" layoutY="170.0" prefHeight="39.0" prefWidth="379.0" promptText="Enter abc123" />
+      <PasswordField fx:id="passwd" layoutX="268.0" layoutY="250.0" prefHeight="39.0" prefWidth="379.0" promptText="Enter password" />
+      <PasswordField fx:id="confirmPasswd" layoutX="274.0" layoutY="411.0" prefHeight="39.0" prefWidth="379.0" promptText="Confirm your password" />
+      <Button layoutX="298.0" layoutY="487.0" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="50.0" prefWidth="105.0" text="DONE" textFill="SIENNA">
+         <font>
+            <Font name="OCR A Extended" size="18.0" />
+         </font></Button>
+      <Button layoutX="475.0" layoutY="487.0" mnemonicParsing="false" onAction="#resetButtonClicked" prefHeight="50.0" prefWidth="105.0" text="RESET" textFill="SIENNA">
+         <font>
+            <Font name="OCR A Extended" size="18.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="39.0" prefWidth="45.0" style="-fx-padding: none; -fx-background-color: none;">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/logout%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Label fx:id="message" layoutX="274.0" layoutY="124.0" prefHeight="27.0" prefWidth="316.0" />
+      <Label layoutX="274.0" layoutY="299.0" prefHeight="27.0" prefWidth="402.0" text="• password should contain at least 6 characters" textFill="#7c7777" />
+      <Label fx:id="message2" layoutX="274.0" layoutY="332.0" prefHeight="27.0" prefWidth="402.0" text="• password should contain at least 1 number" textFill="#7c7777" />
+      <Label fx:id="message21" layoutX="274.0" layoutY="368.0" prefHeight="27.0" prefWidth="402.0" text="• password should contain at least 1 letter" textFill="#7c7777" />
+      <ImageView fitHeight="76.0" fitWidth="91.0" layoutX="192.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/boy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="91.0" fitWidth="76.0" layoutX="498.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/girl%20(1).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
